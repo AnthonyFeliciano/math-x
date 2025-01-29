@@ -61,21 +61,11 @@ class MainController extends Controller
        if(!session()->has('exercises')) {
         return redirect()->route('home');
        }
+        $exercises = session()->get('exercises');
+        return view('printExercises', compact('exercises'));
+    
+   }
 
-       $exercises = session()->get('exercises');
-       echo '<pre>';
-       echo '<h1>Exercícios de Matemática</h1>';
-       foreach($exercises as $exercise) {
-           echo '<h2><small>' . $exercise['exercise_number'] . ') </small> ' . $exercise['exercise'] . '</h2>';
-       }
-
-       //soluções
-       echo '<hr>';
-       echo '<h1>Soluções</h1><br>';
-       foreach($exercises as $exercise) {
-        echo '<h2><small>' . $exercise['exercise_number']. ') </small> ' . $exercise['solution'] . '</h2>';
-       }
-    }
 
     public function exportExercises()
     {
